@@ -1,55 +1,97 @@
-
-
-
 import {
-   
-   collection,
-   getDocs,
-   app,
-   db,
-   addDoc
-   
-} from "./firebase.js";
+    auth,
+    getAuth,
+    createUserWithEmailAndPassword
+} from "./signup.js"
+const signup = async () => {
 
-const submit = document.getElementById('submit');
-submit.addEventListener('click', async () => {
 
-   
+    // const email = document.querySelector('#email');
+    // const password = document.querySelector('#password');
+    // console.log("click", email.value, password.value)
 
-   let email = document.getElementById('email').value;
-   let pasword = document.getElementById('password').value;
-   
-   
-   if(!email){
-      alert("Enter Email !!");
-      return;
-   }else if(!pasword){
-      alert("Enter password !!");
-      return;
-   }else{
-      const data = {
-         userEmail :email,
-         userPassword :pasword
-      }
-   
-   
-      // console.log(data)
-      // console.log(getFirestore)
-      // console.log(collection)
-      // console.log(getDocs)
-      // console.log(app)
-      // console.log(db)
-   
-      const collect = collection(db, "user");
-      const response = await addDoc(collect,data)
-      console.log(response)
-      let visible = document.getElementById('visible');
-      let cnt = document.getElementById('cnt');
-      cnt.className = "hide";
-      visible.className = "submit show";
-      // console.log(email, pasword)
-      // email.value = ''
-      // pasword.value = ''
-   }
-   
-})
+    //     try {
+    //         const email = document.querySelector('#email');
+    //         const password = document.querySelector('#password');
+    //         console.log("click", email.value, password.value)
+
+    //         const userData = {
+    //             Email: email.value,
+    //             Password: password.value
+    //         }
+
+    //         const response = await createUserWithEmailAndPassword(
+    //             auth,
+    //              email.value,
+    //               password.value
+    //         );
+    //         const uid = response.user.uid
+    //    console.log(response, "response");
+    //         alert("sucsess ")
+    //     } catch (error) {
+    //         console.log("error", error.message)
+    //         alert("error")
+    //     }
+
+    // try {
+    //     const email = document.querySelector('#email');
+    // const password = document.querySelector('#password');
+    // console.log("click", email.value, password.value)
+
+    //     // db obj
+    //     const userObj = {
+    //       Email: email.value,
+    //       Password: password.value
+    //     };
+    //     console.log("userObj", userObj);
+    //     // firstly user signup
+    //     const response = await createUserWithEmailAndPassword(
+    //       auth,
+    //       email.value,
+    //       password.value
+    //     );
+    //     const uid = response.user.uid;
+
+    //     // const userResponse = await setDoc(doc(db, "users", uid), userObj);
+    //     alert("user successfully signup")
+    //     window.location.href = "./login.html"
+    //     // console.log("userResponse", userResponse);
+    //     // console.log(response, "response");
+    //   } catch (error) {
+    //     console.log("error", error.message);
+    //     alert(error.message);
+    //   }
+
+    try {
+        const email = document.querySelector('#email');
+        const password = document.querySelector('#password');
+        console.log("result ",email.value,password.value);
+
+        const data = {
+          
+            Email:email.value,
+            Password:password.value
+        }
+
+        console.log("data",data)
+        const response = await createUserWithEmailAndPassword(
+            auth,
+            email.value,
+            password.value  
+        );
+
+        const uid = response.user.uid;
+        alert("sign up sucsses");
+        console.log("response",response)
+
+    } catch (error) {
+        console.log("error",error.message)
+        alert("error");
+    }
+};
+
+
+
+
+
+window.signup = signup;
